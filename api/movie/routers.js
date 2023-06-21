@@ -9,9 +9,14 @@ const {
   movieDelete,
 } = require("./controllers");
 
+//Refactoring the Code
+//routers.param("movieId", (req, res, next, movieId) => {});
+
 routers.get("/movies", getAllMovies);
 routers.post("/movies", uploader.single("posterImage"), movieCreate);
-routers.put("/movies", movieUpdateById);
+//routers.put("/movies/:movieId", movieUpdateById);
+routers.put("/movies", uploader.single("posterImage"), movieUpdateById);
+// routers.delete("/movies/:movieId", movieDelete);
 routers.delete("/movies", movieDelete);
 
 module.exports = routers;

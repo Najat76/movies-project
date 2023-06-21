@@ -14,14 +14,15 @@ const movieCreate = async (req, res, next) => {
     if (req.file) {
       req.body.posterImage = `${req.file.path}`;
     }
-    console.log(req.body);
+    //console.log(req.body);
     const newMovie = await Movie.create(req.body);
     res.status(201).json(newMovie);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res
       .status(500)
       .json({ message: " Error: Can not create a new Movie", error });
+    //return next(error);
   }
 };
 
@@ -37,13 +38,16 @@ const movieUpdateById = async (req, res, next) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Fix error" });
+    //return next(error);
   }
 };
 
 const movieDelete = async (req, res, next) => {
-  const { movieId } = req.params;
+  const { movieId } = req.params; // ok
   try {
-    const foundMovie = await Movie.findById(movieId);
+    const foundMovie = await Movie.findById(movieId); // ok
+    //console.log(movieId);
+
     if (foundMovie) {
       await movieId.deleteOne(req.body);
       res.status(204).end();
@@ -52,6 +56,7 @@ const movieDelete = async (req, res, next) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Fix error" });
+    //return next(error);
   }
 };
 
